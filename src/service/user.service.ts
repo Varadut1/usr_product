@@ -1,6 +1,7 @@
 import { omit } from "lodash";
 import User, { userDocument } from "../models/user.model";
 import { CreatueUserInput } from "../schema/user.schema";
+import { FilterQuery } from "mongoose";
 
 export async function createUser(input: CreatueUserInput): Promise<Omit<userDocument, 'password'>>{
     try{
@@ -26,10 +27,14 @@ export async function validatePassword( {email, password} : {email: string, pass
     if (!user){
         return false;
     }
-    const isValid = await User.comparePassword(password);
+    const isValid = user.comparePassword(password);
 
     if(!isValid)    return false;
 
     return omit(user.toJSON(), 'password') as userDocument;
 
+}
+
+export async function findUser(query: FilterQuery<userDocument>){
+    return User.findOne(query);
 }

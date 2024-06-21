@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import log from '../utils/logger';
-import { createUser, getUsers } from '../service/uesr.service';
+import { createUser, getUsers } from '../service/user.service';
 import { CreatueUserInput } from '../schema/user.schema';
 import { omit } from 'lodash';
 
