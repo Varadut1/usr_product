@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const config_1 = __importDefault(require("config"));
 const connect_1 = __importDefault(require("./utils/connect"));
 const logger_1 = __importDefault(require("./utils/logger"));
 const health_routes_1 = __importDefault(require("./routes/health.routes"));
@@ -22,12 +21,14 @@ const product_routes_1 = __importDefault(require("./routes/product.routes"));
 const morgan_1 = __importDefault(require("morgan"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const deserializeUser_1 = require("./middleware/deserializeUser");
+const dotenv_1 = __importDefault(require("dotenv"));
 const app = (0, express_1.default)();
-const port = config_1.default.get("port");
+const port = process.env.port;
 app.use((0, morgan_1.default)('dev'));
 app.use(body_parser_1.default.json());
+dotenv_1.default.config();
 app.use(deserializeUser_1.deserializeUser);
-app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
+app.listen(process.env.port, () => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, connect_1.default)();
     logger_1.default.info(`App is running at http://localhost:${port}`);
     (0, health_routes_1.default)(app);

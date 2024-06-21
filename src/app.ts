@@ -8,15 +8,16 @@ import productroute from './routes/product.routes';
 import morgan from 'morgan'
 import bodyParser from 'body-parser';
 import { deserializeUser } from './middleware/deserializeUser';
+import dotenv from 'dotenv';
 
 const app = express();
-const port = config.get<string>("port");
+const port = process.env.port;
 app.use(morgan('dev'));
 app.use(bodyParser.json());
-
+dotenv.config();
 app.use(deserializeUser)
 
-app.listen(port, async()=>{
+app.listen(process.env.port, async()=>{
     await connect();
     log.info(`App is running at http://localhost:${port}`);
     healthroute(app);

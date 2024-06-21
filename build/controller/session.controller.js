@@ -8,15 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteSessionHandler = exports.getUserSessionHandler = exports.createSessionHandler = void 0;
 const user_service_1 = require("../service/user.service");
 const session_service_1 = require("../service/session.service");
 const jwt_utils_1 = require("../utils/jwt.utils");
-const config_1 = __importDefault(require("config"));
 function createSessionHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         // validate password
@@ -29,9 +25,9 @@ function createSessionHandler(req, res) {
         // create session
         const session = yield (0, session_service_1.createSession)(user._id, req.get('user-agent'));
         //access token
-        const accessToken = (0, jwt_utils_1.signjwt)(Object.assign(Object.assign({}, user), { session: session._id }), { expiresIn: config_1.default.get('accessTokenTtl') });
+        const accessToken = (0, jwt_utils_1.signjwt)(Object.assign(Object.assign({}, user), { session: session._id }), { expiresIn: process.env.accessTokenTtl });
         //refresh token
-        const refreshToken = (0, jwt_utils_1.signjwt)(Object.assign(Object.assign({}, user), { session: session._id }), { expiresIn: config_1.default.get('refreshTokenTtl') });
+        const refreshToken = (0, jwt_utils_1.signjwt)(Object.assign(Object.assign({}, user), { session: session._id }), { expiresIn: process.env.refreshTokenTtl });
         //return 
         return res.status(200).json({
             message: 'Success',

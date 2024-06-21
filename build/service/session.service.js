@@ -17,7 +17,6 @@ const session_model_1 = __importDefault(require("../models/session.model"));
 const jwt_utils_1 = require("../utils/jwt.utils");
 const lodash_1 = require("lodash");
 const user_service_1 = require("./user.service");
-const config_1 = __importDefault(require("config"));
 function createSession(userId, userAgent) {
     return __awaiter(this, void 0, void 0, function* () {
         const session = yield session_model_1.default.create({ user: userId, userAgent });
@@ -49,7 +48,7 @@ function reIssueAccessToken(refreshToken) {
         if (!user)
             return "";
         user = user.toJSON();
-        const accessToken = (0, jwt_utils_1.signjwt)(Object.assign(Object.assign({}, user), { session: session._id }), { expiresIn: config_1.default.get('accessTokenTtl') });
+        const accessToken = (0, jwt_utils_1.signjwt)(Object.assign(Object.assign({}, user), { session: session._id }), { expiresIn: process.env.accessTokenTtl });
         return accessToken;
     });
 }

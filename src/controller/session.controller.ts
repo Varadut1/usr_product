@@ -21,14 +21,14 @@ export async function createSessionHandler(req: Request, res: Response){
 
     const accessToken = signjwt(
         {...user, session: session._id},
-        { expiresIn: config.get('accessTokenTtl') }
+        { expiresIn: process.env.accessTokenTtl }
     );
 
     //refresh token
 
     const refreshToken = signjwt(
         {...user, session: session._id},
-        { expiresIn: config.get('refreshTokenTtl') }
+        { expiresIn: process.env.refreshTokenTtl }
     );
     //return 
     return res.status(200).json({

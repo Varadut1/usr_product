@@ -28,7 +28,7 @@ export async function reIssueAccessToken( refreshToken:string ){
     user = user.toJSON();
     const accessToken = signjwt(
         {...user, session: session._id},
-        { expiresIn: config.get('accessTokenTtl') }
+        { expiresIn: process.env.accessTokenTtl }
     );
     return accessToken;
 }
