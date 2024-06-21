@@ -6,9 +6,9 @@ dotenv.config();
 async function connect(){
     const dburi = process.env.dburi;
     return await mongoose.connect(dburi as string).then(()=>{
-        // log.info("Connected to MongoDB");
+        console.log("Connected to MongoDB");
     }).catch((e)=>{
-        // log.error("Could not connected to db");
+        console.log("Could not connected to db");
         process.exit(1);
     })
 }

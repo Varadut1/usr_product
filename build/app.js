@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const connect_1 = __importDefault(require("./utils/connect"));
-const logger_1 = __importDefault(require("./utils/logger"));
+// import log from './utils/logger';
 const health_routes_1 = __importDefault(require("./routes/health.routes"));
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
 const product_routes_1 = __importDefault(require("./routes/product.routes"));
@@ -30,7 +30,7 @@ dotenv_1.default.config();
 app.use(deserializeUser_1.deserializeUser);
 app.listen(process.env.port, () => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, connect_1.default)();
-    logger_1.default.info(`App is running at http://localhost:${port}`);
+    console.log(`App is running at http://localhost:${port}`);
     (0, health_routes_1.default)(app);
     (0, user_routes_1.default)(app);
     (0, product_routes_1.default)(app);

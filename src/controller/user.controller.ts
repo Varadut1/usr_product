@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import log from '../utils/logger';
 import { createUser, getUsers } from '../service/user.service';
 import { CreatueUserInput } from '../schema/user.schema';
 import { omit } from 'lodash';
@@ -13,7 +12,7 @@ export async function createUserHandler (req: Request<{}, {}, CreatueUserInput>,
         })
     }
     catch(e: any){
-        log.error(e);
+        console.log(e);
         return res.status(409).json({
             message: e.message
         })
@@ -29,7 +28,7 @@ export async function getUserHandler(req: Request, res: Response){
         })
     }
     catch(e: any){
-        log.error(e);
+        console.log(e);
         return res.status(409).json({
             message: e.message
         });

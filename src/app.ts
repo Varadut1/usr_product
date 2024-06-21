@@ -19,7 +19,7 @@ app.use(deserializeUser)
 
 app.listen(process.env.port, async()=>{
     await connect();
-    // log.info(`App is running at http://localhost:${port}`);
+    console.log(`App is running at http://localhost:${port}`);
     healthroute(app);
     userroute(app);
     productroute(app);

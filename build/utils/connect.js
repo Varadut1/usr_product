@@ -13,16 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const logger_1 = __importDefault(require("./logger"));
+// import log from "./logger";
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 function connect() {
     return __awaiter(this, void 0, void 0, function* () {
         const dburi = process.env.dburi;
         return yield mongoose_1.default.connect(dburi).then(() => {
-            logger_1.default.info("Connected to MongoDB");
+            console.log("Connected to MongoDB");
         }).catch((e) => {
-            logger_1.default.error("Could not connected to db");
+            console.log("Could not connected to db");
             process.exit(1);
         });
     });

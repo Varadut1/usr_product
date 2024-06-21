@@ -8,12 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getUserHandler = exports.createUserHandler = void 0;
-const logger_1 = __importDefault(require("../utils/logger"));
 const user_service_1 = require("../service/user.service");
 function createUserHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -25,7 +21,7 @@ function createUserHandler(req, res) {
             });
         }
         catch (e) {
-            logger_1.default.error(e);
+            console.log(e);
             return res.status(409).json({
                 message: e.message
             });
@@ -43,7 +39,7 @@ function getUserHandler(req, res) {
             });
         }
         catch (e) {
-            logger_1.default.error(e);
+            console.log(e);
             return res.status(409).json({
                 message: e.message
             });
