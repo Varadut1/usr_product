@@ -5,7 +5,6 @@ import { createProductSchema, deleteProductSchema, getProductSchema, updateProdu
 import { createProductHandler, deleteProductHandler, getProductHandler, updateProductHandler } from '../controller/product.controller';
 
 function routes(app:Express){
-    console.log("getting");
     app.post('/api/products', requireUser,validate(createProductSchema), createProductHandler);
     app.put('/api/products/:productId', requireUser,validate(updateProductSchema), updateProductHandler);
     app.get('/api/products/:productId', validate(getProductSchema), getProductHandler);
