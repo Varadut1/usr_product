@@ -1,7 +1,7 @@
 import express from 'express'
 import config from 'config';
 import connect from './utils/connect';
-import log from './utils/logger';
+// import log from './utils/logger';
 import healthroute from './routes/health.routes';
 import userroute from './routes/user.routes';
 import productroute from './routes/product.routes';
@@ -19,7 +19,7 @@ app.use(deserializeUser)
 
 app.listen(process.env.port, async()=>{
     await connect();
-    log.info(`App is running at http://localhost:${port}`);
+    // log.info(`App is running at http://localhost:${port}`);
     healthroute(app);
     userroute(app);
     productroute(app);
