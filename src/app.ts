@@ -24,5 +24,3 @@ app.listen(process.env.port, async()=>{
     userroute(app);
     productroute(app);
 })
-
-export default app;
